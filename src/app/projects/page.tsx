@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState, useCallback, useEffect } from "react";
 import { projects, ALL_TAGS } from "@/data/projects";
 import ProjectCard from "@/components/project-card";
 
-export default function ProjectsPage() {
+function ProjectsInner() {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<Set<string>>(new Set());
 
@@ -85,5 +85,13 @@ export default function ProjectsPage() {
         </p>
       )}
     </section>
+  );
+}
+
+export default function ProjectsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ProjectsInner />
+    </Suspense>
   );
 }

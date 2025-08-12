@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { Suspense, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import AboutHero from "@/components/about-hero";
 import ScrollCue from "@/components/scroll-cue";
@@ -9,7 +9,7 @@ import ExperienceStepper from "@/components/experience-stepper";
 import CaseStudyModal from "@/components/case-study-modal";
 import DropReveal from "@/components/drop-reveal";
 
-export default function Home() {
+function HomeInner() {
   const router = useRouter();
   const params = useSearchParams();
   const slug = params.get("case");
@@ -50,3 +50,11 @@ export default function Home() {
     </>
   );
 }
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <HomeInner />
+    </Suspense>
+  );
+  }
