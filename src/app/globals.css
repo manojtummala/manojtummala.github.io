@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
+/* Light/Dark tokens */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
+  --muted: #f5f5f6;
+  --border: color-mix(in oklab, var(--foreground) 12%, transparent);
+  --muted-foreground: color-mix(in oklab, var(--foreground) 60%, transparent);
+}
+.dark {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --muted: #171717;
+  --border: color-mix(in oklab, var(--foreground) 16%, transparent);
+  --muted-foreground: color-mix(in oklab, var(--foreground) 64%, transparent);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.bg-background { background-color: var(--background); }
+.text-foreground { color: var(--foreground); }
+.text-muted-foreground { color: var(--muted-foreground); }
+.hover\:bg-muted:hover { background-color: var(--muted); }
+.border-border { border-color: var(--border); }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+/* Base link reset */
+@layer base {
+  a {
+    @apply no-underline;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Lightweight components */
+@layer components {
+  /* Buttons */
+  .btn { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2; }
+  .btn-ghost { @apply border; border-color: var(--border); }
+  .btn-ghost:hover { background-color: var(--muted); }
+  .btn-primary { @apply text-white; background-image: linear-gradient(to right, #4f46e5, #0284c7); }
+
+  /* Chips */
+  .chip { @apply rounded-full border px-3 py-1 text-xs transition; color: var(--muted-foreground); border-color: var(--border); }
+  .chip:hover { background-color: var(--muted); }
+
+  /* Cards */
+  .card { @apply rounded-xl border p-4 shadow-sm; border-color: var(--border); }
 }
+
+html { scroll-behavior: smooth; }
+
+/* Nicer text selection */
+::selection { background: color-mix(in oklab, #6366f1 25%, transparent); }
