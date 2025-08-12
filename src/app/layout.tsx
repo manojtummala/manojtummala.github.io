@@ -14,7 +14,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-background text-foreground antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-          <main className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">{children}</main>
+          {/* remove the max-w clamp here */}
+          <main className="w-full">{children}</main>
         </ThemeProvider>
       </body>
     </html>

@@ -50,3 +50,9 @@ html { scroll-behavior: smooth; }
 
 /* Nicer text selection */
 ::selection { background: color-mix(in oklab, #6366f1 25%, transparent); }
+
+@layer utilities {
+  .container {
+    @apply mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8;
+  }
+}

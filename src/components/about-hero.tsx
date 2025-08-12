@@ -29,6 +29,7 @@ const skills = ["Next.js","TypeScript","React","Node.js","Python","AWS","Postgre
 export default function AboutHero() {
   return (
     <section className="relative overflow-hidden py-24">
+      <div className="container">
       {/* subtle background grid */}
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]
                       [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]
@@ -111,6 +112,7 @@ export default function AboutHero() {
           </div>
         </div>
       </motion.div>
+      </div>
     </section>
   );
 }
