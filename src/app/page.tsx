@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import AboutHero from "@/components/about-hero";
 import ScrollCue from "@/components/scroll-cue";
@@ -42,7 +42,7 @@ export default function Home() {
       </div>
 
       <ProjectsCarousel onOpen={openCase} />
-      <ExperienceStepper onOpen={openCase} />
+      <ExperienceStepper />
 
       <DropReveal onOpen={openCase} />
 

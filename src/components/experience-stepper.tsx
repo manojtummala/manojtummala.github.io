@@ -8,13 +8,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { experiences } from "@/data/experiences";
 import { setCardDragGhost } from "@/lib/drag-ghost";
 
-export default function ExperienceStepper({ onOpen }: { onOpen: (slug: string)=>void }) {
+export default function ExperienceStepper() {
   const [i, setI] = useState(0);
   const leftRef = useRef<HTMLDivElement>(null);
   const [leftH, setLeftH] = useState<number | null>(null);
 
   // native HTML5 dragstart helper (works with DropReveal)
-  const handleDragStart = (ev: React.DragEvent, id: string, _label: string) => {
+  const handleDragStart = (ev: React.DragEvent, id: string) => {
   ev.dataTransfer.setData("slug", id);
   ev.dataTransfer.setData("type", "experience");
   ev.dataTransfer.setData("text/plain", id);
@@ -61,7 +61,7 @@ export default function ExperienceStepper({ onOpen }: { onOpen: (slug: string)=>
             <div
               className="h-full"
               draggable
-              onDragStart={(ev) => handleDragStart(ev, e.id, `${e.role}`)}
+              onDragStart={(ev) => handleDragStart(ev, e.id)}
             >
               <motion.article
                 key={e.id}
@@ -109,7 +109,7 @@ export default function ExperienceStepper({ onOpen }: { onOpen: (slug: string)=>
                 key={x.id}
                 className="flex-1 min-h-0"
                 draggable
-                onDragStart={(ev) => handleDragStart(ev, x.id, `${x.role}`)}
+                onDragStart={(ev) => handleDragStart(ev, x.id)}
               >
                 <motion.button
                   layout

@@ -1,5 +1,5 @@
 // src/lib/drag-ghost.ts
-export function setCardDragGhost(e: React.DragEvent, _label?: string) {
+export function setCardDragGhost(e: React.DragEvent) {
   const svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="120" height="160">
     <defs>
