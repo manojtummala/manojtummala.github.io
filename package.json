@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "bash scripts/deploy.sh",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
@@ -26,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "postcss": "^8.5.6",
+    "sass": "^1.90.0",
     "tailwindcss": "^4.1.11",
     "typescript": "^5"
   }

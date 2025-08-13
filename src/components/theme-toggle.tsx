@@ -16,10 +16,10 @@ export function ThemeToggle() {
     <button
       aria-label="Toggle theme"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="rounded-xl border px-3 py-2 text-sm hover:bg-muted transition"
+      className="rounded-xl px-3 py-2 text-sm hover:bg-muted transition backdrop-blur"
     >
       {mounted ? (
-        isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />
+        isDark ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />
       ) : (
         // placeholder to keep layout stable on server render
         <span className="inline-block h-4 w-4" />

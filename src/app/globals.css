@@ -1,58 +1,47 @@
 @import "tailwindcss";
 
-/* Light/Dark tokens */
-:root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --muted: #f5f5f6;
-  --border: color-mix(in oklab, var(--foreground) 12%, transparent);
-  --muted-foreground: color-mix(in oklab, var(--foreground) 60%, transparent);
-}
-.dark {
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-  --muted: #171717;
-  --border: color-mix(in oklab, var(--foreground) 16%, transparent);
-  --muted-foreground: color-mix(in oklab, var(--foreground) 64%, transparent);
-}
-
-.bg-background { background-color: var(--background); }
-.text-foreground { color: var(--foreground); }
-.text-muted-foreground { color: var(--muted-foreground); }
-.hover\:bg-muted:hover { background-color: var(--muted); }
-.border-border { border-color: var(--border); }
-
+html { scroll-behavior: smooth; }
 
 /* Base link reset */
 @layer base {
-  a {
-    @apply no-underline;
-  }
+  a { @apply no-underline; }
 }
 
 /* Lightweight components */
 @layer components {
   /* Buttons */
   .btn { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2; }
-  .btn-ghost { @apply border; border-color: var(--border); }
-  .btn-ghost:hover { background-color: var(--muted); }
+  .btn-ghost { @apply border border-slate-200 dark:border-slate-700; }
+  .btn-ghost:hover { @apply bg-slate-100 dark:bg-slate-800; }
   .btn-primary { @apply text-white; background-image: linear-gradient(to right, #4f46e5, #0284c7); }
 
   /* Chips */
-  .chip { @apply rounded-full border px-3 py-1 text-xs transition; color: var(--muted-foreground); border-color: var(--border); }
-  .chip:hover { background-color: var(--muted); }
+  .chip { @apply rounded-full border px-3 py-1 text-xs transition text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700; }
+  .chip:hover { @apply bg-slate-100 dark:bg-slate-800; }
 
   /* Cards */
-  .card { @apply rounded-xl border p-4 shadow-sm; border-color: var(--border); }
+  .card { @apply rounded-xl border p-4 shadow-sm border-slate-200 dark:border-slate-700; }
 }
-
-html { scroll-behavior: smooth; }
 
 /* Nicer text selection */
 ::selection { background: color-mix(in oklab, #6366f1 25%, transparent); }
 
 @layer utilities {
-  .container {
-    @apply mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8;
+  .container { @apply mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8; }
+  .section { @apply py-16; }
+  .heading { @apply text-2xl sm:text-3xl font-bold tracking-tight; }
+
+  /* glassy card surface */
+  .surface { @apply rounded-2xl border shadow-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-700; }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white;
+    background-image: linear-gradient(90deg, #4f46e5, #0284c7);
+  }
+
+  /* gradient headline option */
+  .gradient-text {
+    background-image: linear-gradient(90deg, #4f46e5, #0284c7, #a78bfa);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
   }
 }

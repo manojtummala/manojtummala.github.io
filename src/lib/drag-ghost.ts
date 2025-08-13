@@ -1,18 +1,21 @@
-// src/lib/drag-ghost.ts
 export function setCardDragGhost(e: React.DragEvent) {
   const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="120" height="160">
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
     <defs>
       <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity="0.25"/>
+        <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.3"/>
       </filter>
     </defs>
-    <rect x="8" y="8" rx="12" ry="12" width="104" height="144" fill="#fff" stroke="#000" stroke-opacity=".12" filter="url(#shadow)"/>
-    <!-- folded corner -->
-    <polygon points="96,8 112,8 112,24" fill="#eee" />
-    <line x1="24" y1="48" x2="96" y2="48" stroke="#999" stroke-opacity=".4" stroke-width="4" />
-    <line x1="24" y1="68" x2="92" y2="68" stroke="#999" stroke-opacity=".35" stroke-width="4" />
-    <line x1="24" y1="88" x2="86" y2="88" stroke="#999" stroke-opacity=".3" stroke-width="4" />
+    <!-- File icon -->
+    <rect x="8" y="4" width="32" height="40" rx="2" fill="#3b82f6" stroke="#1e40af" stroke-width="1" filter="url(#shadow)"/>
+    <!-- Folded corner -->
+    <polygon points="32,4 40,4 40,12" fill="#1e40af" />
+    <!-- File lines -->
+    <line x1="12" y1="16" x2="28" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <line x1="12" y1="22" x2="28" y2="22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <line x1="12" y1="28" x2="24" y2="28" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <!-- File extension dot -->
+    <circle cx="36" cy="32" r="2" fill="white"/>
   </svg>`;
   const img = new Image();
   img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
@@ -21,13 +24,11 @@ export function setCardDragGhost(e: React.DragEvent) {
   img.style.left = "-200px";
   document.body.appendChild(img);
 
-  // Be generous with dataTransfer for cross-browser
   e.dataTransfer.effectAllowed = "copy";
-  // Keep existing custom types; caller will set them, but we can include a text/plain fallback here too if needed.
   if (!e.dataTransfer.getData("text/plain")) {
     e.dataTransfer.setData("text/plain", "card");
   }
 
-  e.dataTransfer.setDragImage(img, 60, 80);
+  e.dataTransfer.setDragImage(img, 24, 24);
   setTimeout(() => document.body.removeChild(img), 0);
 }
