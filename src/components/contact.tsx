@@ -61,7 +61,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
           >
-            I'm always interested in new opportunities, collaborations, and interesting conversations. 
+              I&#39;m always interested in new opportunities, collaborations, and interesting conversations. 
             Feel free to reach out through any of these channels.
           </motion.p>
         </div>
@@ -104,7 +104,7 @@ export default function Contact() {
         >
           <div className="max-w-2xl mx-auto p-6 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700">
             <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-3">
-              What I'm Looking For
+                What I&#39;m Looking For
             </h3>
             <p className="text-slate-600 dark:text-slate-400 mb-4">
               Full-stack engineering roles, ML/DS opportunities, or interesting projects that challenge me to grow.

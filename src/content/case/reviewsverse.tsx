@@ -38,7 +38,7 @@ export default function ReviewsVerseCase() {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100">What I'd improve</h2>
+        <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100">What I&#39;d improve</h2>
         <ul className="mt-2 list-disc pl-5 space-y-1 text-sm text-slate-700 dark:text-slate-300">
           <li>Move cache keys to request-scoped hashes; add partial hydration to UI.</li>
           <li>Introduce e2e SLOs with RED metrics + synthetic checks.</li>

@@ -34,7 +34,7 @@ function HomeInner() {
       return;
     }
     // (Optional) If you want to support experience-only GitHub via registry metadata:
-    const gh = (CASE_REGISTRY as any)[id]?.github as string | undefined;
+  const gh = (CASE_REGISTRY as Record<string, { github?: string }>)[id]?.github;
     if (gh) window.open(gh, "_blank", "noopener,noreferrer");
   }, [router]);
 
