@@ -17,7 +17,7 @@ export default function AboutHero() {
             className="font-[family-name:var(--font-display)] text-4xl lg:text-6xl leading-[1.03] font-bold"
           >
             <span className="bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-700 dark:from-slate-100 dark:via-blue-200 dark:to-indigo-300 bg-clip-text text-transparent">
-              Hi, I'm Manoj
+              Hi, I&apos;m Manoj
             </span>
             <br />
             <span className="text-slate-700 dark:text-slate-200 font-semibold">
@@ -42,7 +42,7 @@ export default function AboutHero() {
           >
             Comfortable across the stack: Next.js/React & Node services, typed APIs, and Postgres/Mongo.
             In ML/DS I build data pipelines, evaluation harnesses, and deploy models behind lean endpoints.
-            I enjoy infrastructure that doesn't get in the way—Docker, queues, observability—and pushing
+            I enjoy infrastructure that doesn&apos;t get in the way—Docker, queues, observability—and pushing
             changes safely to production with tests and CI.
           </motion.p>
           <motion.p 
@@ -51,7 +51,7 @@ export default function AboutHero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-4 max-w-3xl text-sm sm:text-base text-slate-600 dark:text-slate-300"
           >
-            As a CS enthusiast, I'm driven by creating reliable systems that are simple to operate, measurable
+            As a CS enthusiast, I&apos;m driven by creating reliable systems that are simple to operate, measurable
             in impact, and a pleasure to use.
           </motion.p>
 

@@ -88,7 +88,7 @@ export default function ProjectsCarousel({ onOpen }: { onOpen: (slug: string) =>
             {/* Deck */}
             <div
               className="relative mx-auto grid place-items-center select-none"
-              style={{ minHeight: CARD_H + 80, width: '100%', maxWidth: '800px' }}
+              style={{ minHeight: CARD_H + 80, width: "100%", maxWidth: "800px" }}
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
               onPointerDown={onPointerDown}
