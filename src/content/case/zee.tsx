@@ -19,7 +19,7 @@ export default function ZeeCase() {
         <li>More reliable deploys with basic test gates.</li>
       </ul>
 
-      <h2>What I’d improve</h2>
+      <h2>What I&#39;d improve</h2>
       <ul>
         <li>Design tokens + storybook for shared components.</li>
         <li>Observability around API failures in the UI.</li>

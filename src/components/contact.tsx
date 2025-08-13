@@ -53,7 +53,7 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-slate-800 to-indigo-700 dark:from-slate-100 dark:to-indigo-300 bg-clip-text text-transparent mb-4"
           >
-            Let's Connect
+            Let&#39;s Connect
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
