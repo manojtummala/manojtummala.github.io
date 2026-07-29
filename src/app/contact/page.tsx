@@ -1,1 +1,0 @@
-export default function Page(){return <div className="py-10">Contact soon</div>}

@@ -1,47 +1,41 @@
 @import "tailwindcss";
 
+:root {
+  --font-geist: "Geist", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+}
+
 html { scroll-behavior: smooth; }
 
-/* Base link reset */
+body {
+  font-family: var(--font-geist);
+}
+
 @layer base {
   a { @apply no-underline; }
 }
 
-/* Lightweight components */
-@layer components {
-  /* Buttons */
-  .btn { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2; }
-  .btn-ghost { @apply border border-slate-200 dark:border-slate-700; }
-  .btn-ghost:hover { @apply bg-slate-100 dark:bg-slate-800; }
-  .btn-primary { @apply text-white; background-image: linear-gradient(to right, #4f46e5, #0284c7); }
-
-  /* Chips */
-  .chip { @apply rounded-full border px-3 py-1 text-xs transition text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700; }
-  .chip:hover { @apply bg-slate-100 dark:bg-slate-800; }
-
-  /* Cards */
-  .card { @apply rounded-xl border p-4 shadow-sm border-slate-200 dark:border-slate-700; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px),
+    radial-gradient(circle at 0 0, #cbd5e1 1px, transparent 0);
+  background-size: 48px 48px, 48px 48px, 48px 48px;
+  pointer-events: none;
+  z-index: 0;
 }
-
-/* Nicer text selection */
-::selection { background: color-mix(in oklab, #6366f1 25%, transparent); }
 
 @layer utilities {
   .container { @apply mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8; }
   .section { @apply py-16; }
-  .heading { @apply text-2xl sm:text-3xl font-bold tracking-tight; }
-
-  /* glassy card surface */
-  .surface { @apply rounded-2xl border shadow-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-700; }
 
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white;
-    background-image: linear-gradient(90deg, #4f46e5, #0284c7);
+    background-color: #0f172a;
   }
 
-  /* gradient headline option */
-  .gradient-text {
-    background-image: linear-gradient(90deg, #4f46e5, #0284c7, #a78bfa);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
+  .font-mono { font-family: var(--font-geist-mono); }
 }

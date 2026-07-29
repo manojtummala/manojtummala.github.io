@@ -1,151 +1,143 @@
 "use client";
 
-import type React from "react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { experiences } from "@/data/experiences";
-import { setCardDragGhost } from "@/lib/drag-ghost";
+
+const NODE_COLORS = [
+  { from: "#0f172a", to: "#09090b" },
+  { from: "#334155", to: "#0f172a" },
+  { from: "#475569", to: "#334155" },
+  { from: "#1e293b", to: "#0f172a" },
+];
 
 export default function ExperienceStepper() {
   const [i, setI] = useState(0);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const [leftH, setLeftH] = useState<number | null>(null);
-
-  // measure left column to keep right column same height
-  useLayoutEffect(() => {
-    const el = leftRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(() => setLeftH(el.getBoundingClientRect().height));
-    ro.observe(el);
-    setLeftH(el.getBoundingClientRect().height);
-    return () => ro.disconnect();
-  }, [i]);
-
-  // keyboard arrows
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") setI((x) => Math.max(0, x - 1));
-      if (e.key === "ArrowRight") setI((x) => Math.min(experiences.length - 1, x + 1));
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  // drag helper
-  const handleDragStart = (ev: React.DragEvent, id: string) => {
-    ev.dataTransfer.setData("slug", id);
-    ev.dataTransfer.setData("type", "experience");
-    ev.dataTransfer.setData("text/plain", id);
-    ev.dataTransfer.effectAllowed = "copy";
-    setCardDragGhost(ev);
-  };
 
   const e = experiences[i];
 
   return (
-    <section id="experience" className="section scroll-mt-28 bg-gradient-to-br from-slate-100/40 via-blue-100/20 to-indigo-100/20 dark:from-slate-800/40 dark:via-slate-700/20 dark:to-indigo-800/20">
-      <div className="container">
-        <div className="mb-8 flex items-center justify-between">
-          <h2 className="heading text-3xl sm:text-4xl font-bold bg-gradient-to-r from-slate-800 to-indigo-700 dark:from-slate-100 dark:to-indigo-300 bg-clip-text text-transparent">
+    <div>
+      <div>
+        <div className="mb-10 flex items-center justify-between">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
             Experience
           </h2>
           <div className="flex items-center gap-2">
-            <button 
-              className="rounded-xl border-2 p-2.5 hover:scale-105 transition-all duration-200 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-600 hover:bg-white dark:hover:bg-slate-700 shadow-lg"
+            <button
+              className="rounded-xl border border-slate-200 p-2.5 text-slate-600 transition hover:bg-slate-100"
               onClick={() => setI(Math.max(0, i - 1))}
+              disabled={i === 0}
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
             <button
-              className="rounded-xl border-2 p-2.5 hover:scale-105 transition-all duration-200 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-600 hover:bg-white dark:hover:bg-slate-700 shadow-lg"
+              className="rounded-xl border border-slate-200 p-2.5 text-slate-600 transition hover:bg-slate-100"
               onClick={() => setI(Math.min(experiences.length - 1, i + 1))}
+              disabled={i === experiences.length - 1}
             >
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {/* LEFT: main card */}
-          <AnimatePresence mode="popLayout" initial={false}>
-            <div
-              key={e.id}
-              ref={leftRef}
-              className="h-full"
-              draggable
-              onDragStart={(ev) => handleDragStart(ev, e.id)}
-            >
-              <motion.article
-                layout
-                initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 220, damping: 24 }}
-                className="rounded-2xl border-2 border-slate-200 dark:border-slate-600 p-6 relative overflow-hidden bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <h3 className="text-lg font-semibold leading-tight text-slate-800 dark:text-slate-100">
-                  {e.role} • {e.company}
-                </h3>
-                <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">{e.period}</p>
-                <p className="mt-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{e.summary}</p>
-
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {e.tags.slice(0, 5).map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border px-3 py-1 text-xs bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="mt-4 text-xs text-slate-600 dark:text-slate-400">
-                  Drag this card (or any on the right) into the drop zone below to read the full case
-                  study.
-                </p>
-
-                {/* soft glow */}
-                <motion.div
-                  aria-hidden
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="pointer-events-none absolute -right-24 -bottom-24 h-64 w-64 rounded-full"
-                  style={{ background: "radial-gradient(closest-side, rgba(59,130,246,.12), transparent)" }}
-                />
-              </motion.article>
-            </div>
-          </AnimatePresence>
-
-          {/* RIGHT: neighbors (same height as left) */}
-          <div className="flex flex-col gap-3" style={leftH ? { height: leftH } : undefined}>
-            {experiences.map((x, idx) =>
-              idx !== i ? (
-                <div
-                  key={x.id}
-                  className="flex-1 min-h-0"
-                  draggable
-                  onDragStart={(ev) => handleDragStart(ev, x.id)}
+        {/* DAG Pipeline Visualization */}
+        <div className="mb-12 flex items-center justify-center gap-0">
+          {experiences.map((exp, idx) => {
+            const isActive = idx === i;
+            const col = NODE_COLORS[idx % NODE_COLORS.length];
+            return (
+              <div key={exp.id} className="flex items-center">
+                {/* Node */}
+                <button
+                  onClick={() => setI(idx)}
+                  className="flex flex-col items-center gap-1"
                 >
-                  <motion.button
-                    layout
-                    onClick={() => setI(idx)}
-                    whileHover={{ x: 2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="h-full w-full surface p-3 text-left text-sm hover:opacity-90"
+                  <div
+                    className="flex h-12 w-12 items-center justify-center rounded-xl text-xs font-bold text-white shadow-md transition-all duration-300"
+                    style={{
+                      background: `linear-gradient(135deg, ${col.from}, ${col.to})`,
+                      opacity: isActive ? 1 : 0.5,
+                      transform: isActive ? "scale(1.1)" : "scale(1)",
+                    }}
                   >
-                    <div className="font-medium line-clamp-1 text-slate-800 dark:text-slate-100">
-                      {x.role} • {x.company}
-                    </div>
-                    <div className="text-xs text-slate-600 dark:text-slate-400">{x.period}</div>
-                  </motion.button>
-                </div>
-              ) : null
-            )}
-          </div>
+                    {idx + 1}
+                  </div>
+                  <span
+                    className={`flex h-[36px] max-w-[80px] items-center justify-center text-center text-[10px] font-medium leading-tight transition-colors ${
+                      isActive
+                        ? "text-slate-900"
+                        : "text-slate-400"
+                    }`}
+                  >
+                    {exp.company}
+                  </span>
+                </button>
+
+                {idx < experiences.length - 1 && (
+                  <ArrowRight className="mx-2 h-4 w-4 text-slate-300" />
+                )}
+              </div>
+            );
+          })}
         </div>
+
+        {/* Active detail */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={e.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="mx-auto max-w-3xl"
+          >
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900">
+                    {e.role}
+                  </h3>
+                  <p className="text-sm text-slate-500">
+                    {e.company}
+                  </p>
+                </div>
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+                  {e.period}
+                </span>
+              </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                {e.summary}
+              </p>
+
+              <ul className="mt-4 space-y-2">
+                {e.highlights.map((h) => (
+                  <li
+                    key={h}
+                    className="flex items-start gap-2 text-sm text-slate-600"
+                  >
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {e.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-slate-200 px-2.5 py-0.5 text-[11px] font-medium text-slate-600"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
-    </section>
+    </div>
   );
 }
