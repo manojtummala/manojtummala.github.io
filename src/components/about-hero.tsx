@@ -1,6 +1,6 @@
 "use client";
 
-import { Download } from "lucide-react";
+import { Download, Github, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import Gauge from "@/components/gauge";
 
@@ -46,7 +46,7 @@ export default function AboutHero() {
             in data engineering, SRE, and infrastructure.
           </motion.p>
 
-          {/* Resume pill + Email */}
+          {/* Resume pill + social links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -60,6 +60,24 @@ export default function AboutHero() {
               className="btn-primary shadow-lg hover:shadow-xl transition-all duration-300 px-5 py-2.5"
             >
               <Download className="h-4 w-4" /> Resume
+            </a>
+            <a
+              href="https://github.com/manojtummala"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-xl border border-slate-200 p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+              aria-label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+            <a
+              href="https://linkedin.com/in/manojtummala"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-xl border border-slate-200 p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
             </a>
             <span className="font-mono text-sm text-slate-400">
               manojtum@usc.edu

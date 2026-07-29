@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Download } from "lucide-react";
+import { Download, Github, Linkedin } from "lucide-react";
 import RadarChart from "@/components/radar-chart";
 import ExperienceStepper from "@/components/experience-stepper";
 
@@ -151,12 +151,12 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Resume pill */}
+          {/* Resume + socials */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-12 text-center"
+            className="mt-12 flex flex-wrap items-center justify-center gap-3"
           >
             <a
               href="/Manoj_Tummala_Resume.pdf"
@@ -165,6 +165,24 @@ export default function About() {
               className="btn-primary shadow-lg hover:shadow-xl transition-all duration-300 px-5 py-2.5"
             >
               <Download className="h-4 w-4" /> Resume
+            </a>
+            <a
+              href="https://github.com/manojtummala"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-xl border border-slate-200 p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+              aria-label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+            <a
+              href="https://linkedin.com/in/manojtummala"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-xl border border-slate-200 p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
             </a>
           </motion.div>
         </div>
