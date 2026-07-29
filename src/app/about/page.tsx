@@ -176,7 +176,7 @@ export default function About() {
               <Github className="h-4 w-4" />
             </a>
             <a
-              href="https://linkedin.com/in/manojtummala"
+              href="https://www.linkedin.com/in/manoj-tummala/"
               target="_blank"
               rel="noreferrer"
               className="rounded-xl border border-slate-200 p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
